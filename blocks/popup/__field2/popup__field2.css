@@ -1,0 +1,18 @@
+.popup__field2 {
+   width: 100%;
+   font-size: 14px;
+   line-height: 17px;
+   color: #000000;
+   border: none;
+   border-bottom: 1px solid rgb(0, 0, 0, .2);
+   margin-bottom: 48.5px;
+   padding: 11px 0;
+   outline:none;
+}
+
+@media screen and (max-width: 700px) {
+   .popup__field2 {
+      padding: 11px 0;
+      margin-bottom: 45px;
+   }
+}
