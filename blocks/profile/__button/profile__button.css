@@ -1,16 +1,13 @@
 .profile__button {
-   position: absolute;
+   grid-area: button;
    width: 24px;
-   top: 25px;
-   right: -49px;
    transition: all 250ms ease-out;
+   align-items: center;
 }
 
 @media screen and (max-width: 700px) {
    .profile__button {
       width: 18px;
-      top: 35px;
-      right: 15px;
    }
 }
 

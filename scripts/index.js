@@ -7,10 +7,10 @@ console.log('start');
 const popupElement = document.querySelector('.popup');
 const popupCloseButtonElement = popupElement.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__button');
-const formElement = popupElement.querySelector('.popup__form');
-const popupSubmitButtonElement = popupElement.querySelector('.popup__button');
-const popupNameInputElement = document.querySelector('.popup__field1');
-const popupNameJobElement = document.querySelector('.popup__field2');
+const formElement = popupElement.querySelector('.form');
+const popupSubmitButtonElement = popupElement.querySelector('.form__button');
+const popupNameInputElement = document.querySelector('.form__input-name');
+const popupNameJobElement = document.querySelector('.form__input-job');
 
 let userName = document.querySelector('.profile__name').textContent;
 let userJob = document.querySelector('.profile__job').textContent;
