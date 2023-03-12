@@ -11,6 +11,6 @@
 
 **Сайт**
 
-- [Ссылка на Сайт](https://aleksandrzimin.github.io/project4/)
+- [Ссылка на Сайт](https://aleksandrzimin.github.io/mesto/)
 
 Спасибо за внимание!

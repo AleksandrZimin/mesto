@@ -3,6 +3,11 @@
    width: 22px;
    height: 19px;
    transition: all 250ms ease-out;
+   background-color: #ffffff;
+   background-image: url(../../../images/Group.svg);
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
 }
 
 .element__icon:hover {
@@ -11,8 +16,8 @@
    transition: all 250ms ease-out;
 }
 
-.element__icon:active {
+/* .element__icon:active {
    overflow: hidden;
    background-color: #000000;
    color: #000000;
-}
+} */

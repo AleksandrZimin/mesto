@@ -4,7 +4,7 @@
    height: 50px;
    border: 2px solid #FFFFFF;
    border-radius: 2px;
-   background-color: #000000;
+   background-color: #00000000;
    transition: all 250ms ease-out; 
 }
 
@@ -14,10 +14,6 @@
    .profile__add-button {
       width: 100%;
       max-width: 282px;
-   }
-
-   .profile__add-button img {
-      width: 16px;
    }
 }
 
