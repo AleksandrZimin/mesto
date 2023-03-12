@@ -1,6 +1,6 @@
 .element__title {
    margin: 0;
-   flex-basis: 200px;
+   flex-basis: 195px;
    text-overflow: ellipsis;
    white-space: nowrap;
    overflow: hidden;
