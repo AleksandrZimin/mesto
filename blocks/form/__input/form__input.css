@@ -7,10 +7,5 @@
    border-bottom: 1px solid rgb(0, 0, 0, .2);
    padding: 11px 0;
    outline:none;
-}
-
-@media screen and (max-width: 700px) {
-   .form__input {
-      padding: 11px 0;
-   }
+   margin-bottom: 17px;
 }

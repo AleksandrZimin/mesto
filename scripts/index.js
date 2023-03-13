@@ -18,6 +18,8 @@ popupElement.classList.add('popup_opened');
 popupNameInputElement.value = userName.textContent;
 popupNameJobElement.value = userJob.textContent;
 
+}
+
 function handleFormSubmit (evt) {
    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
                                                // Так мы можем определить свою логику отправки.
@@ -28,9 +30,6 @@ function handleFormSubmit (evt) {
    userJob.textContent = popupNameJobElement.value;
 
    closePopup();
-}
-
-formElement.addEventListener('submit', handleFormSubmit); 
 }
 
 // popupNameInputElement.value = userName;
@@ -52,6 +51,7 @@ const closePopup = function () {
 /** Регистрируем обработчики событий */
 popupOpenButtonElement.addEventListener("click", openPopup);
 popupCloseButtonElement.addEventListener("click", closePopup);
+formElement.addEventListener('submit', handleFormSubmit); 
 // popupElement.addEventListener("click", closePopupByClickOverlay);
 
 

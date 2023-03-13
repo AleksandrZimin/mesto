@@ -3,7 +3,7 @@
    width: 22px;
    height: 19px;
    transition: all 250ms ease-out;
-   background-color: #ffffff;
+   background-color: rgba(255, 255, 255, 1);;
    background-image: url(../../../images/Group.svg);
    background-repeat: no-repeat;
    background-position: center;
@@ -15,9 +15,3 @@
    cursor: pointer;
    transition: all 250ms ease-out;
 }
-
-/* .element__icon:active {
-   overflow: hidden;
-   background-color: #000000;
-   color: #000000;
-} */
