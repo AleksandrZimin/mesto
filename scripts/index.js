@@ -159,6 +159,6 @@ closePopupElement.addEventListener("click", closePopup2);
 popupClosePhotoElement.addEventListener("click", closePopupPic);
 formButton.addEventListener('submit', handleSubmit);
 // openPopupPhotoEl.addEventListener("click", openPopupPic);
-// itemCard.addEventListener('click', openPopupPic); - не работает?
+// itemCard.addEventListener('click', openPopupPic); - не работает!?
 // popupElement.addEventListener("click", closePopupByClickOverlay);
 // formButton.addEventListener("click", pushItem);
