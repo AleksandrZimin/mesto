@@ -21,21 +21,20 @@ const initialCards = [{
 {
    name: 'Байкал',
    link: 'https://images.unsplash.com/photo-1679564881633-fc8ef0c9c07f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-   size: 54
 }
 ];
 
 /* Делаем выборку DOM элементов */
-const popupElement = document.querySelector('.popup');
-const popupCloseButtonElement = popupElement.querySelector('.popup__close');
+const profilePopup = document.querySelector('.profile-popup');
+const popupCloseButtonElement = profilePopup.querySelector('.popup-profile-close');
 const popupOpenButtonElement = document.querySelector('.profile__button');
-const formElement = popupElement.querySelector('.form');
+const formElement = profilePopup.querySelector('.form');
 const formElementAddCard = document.querySelector('.form_type_addCard');
 const addPopupElement = document.querySelector('.profile__add-button');
-const popupAddCardElement = document.querySelector('.popup-el');
-const closePopupElement = popupAddCardElement.querySelector('.popup-el__close');
+const popupAddCardElement = document.querySelector('.card-popup');
+const closePopupElement = popupAddCardElement.querySelector('.popup-card-close');
 const popupOpenPhotoElement = document.querySelector('.popup-photo');
-const popupClosePhotoElement = popupOpenPhotoElement.querySelector('.popup-photo__close');
+const popupClosePhotoElement = popupOpenPhotoElement.querySelector('.popup-photo-close');
 
 const openPopupPhotoEl = document.querySelector('.element__image');
 const template = document.querySelector('.template').content;
@@ -46,13 +45,13 @@ const formButton = popupAddCardElement.querySelector('.form__button');
 const deleteButton = document.querySelector('.element__card');
 const heartIcon = document.querySelector('.element__icon');
 const itemCard = document.querySelector('.element');
-const popupNameInputElement = popupElement.querySelector('.form__input_place_name');
-const popupNameJobElement = popupElement.querySelector('.form__input_place_job');
+const popupNameInputElement = profilePopup.querySelector('.form__input_place_name');
+const popupNameJobElement = profilePopup.querySelector('.form__input_place_job');
 const userName = document.querySelector('.profile__name');
 const userJob = document.querySelector('.profile__job');
 
-const photoSubtitle = popupOpenPhotoElement.querySelector('.popup-photo__subtitle');
-const photoItemPopup = popupOpenPhotoElement.querySelector('.popup-photo__item');
+const photoSubtitle = popupOpenPhotoElement.querySelector('.popup__subtitle');
+const photoItemPopup = popupOpenPhotoElement.querySelector('.popup__item');
 const elementTitle = document.querySelector('.element__title');
 
 /* Открытие поп апа */
@@ -112,7 +111,7 @@ function handleFormSubmit (evt) {
    /* Вставляем новые значения с помощью textContent */
    userName.textContent = popupNameInputElement.value; 
    userJob.textContent = popupNameJobElement.value;
-   closePopup(popupElement);
+   closePopup(profilePopup);
 }
 
 /* Добавление карточки */
@@ -122,6 +121,7 @@ const handleSubmit = (evt) => {
    const valueTitle = formInputTitle.value;
    renderItem(valueLink, valueTitle);
    closePopup(popupAddCardElement);
+   evt.target.reset()
 }
 
 /* Удаление карточки */
@@ -136,14 +136,17 @@ function handleLike (evt) {
    likeButton.classList.toggle('element__icon_active');
 }
 
-/** Регистрируем обработчики событий */
+/* Регистрируем обработчики событий */
 popupOpenButtonElement.addEventListener("click", () => { 
    popupNameInputElement.value = userName.textContent;
    popupNameJobElement.value = userJob.textContent;
-   openPopup(popupElement) });
+   openPopup(profilePopup) });
 addPopupElement.addEventListener("click", () => { openPopup(popupAddCardElement) });
 popupClosePhotoElement.addEventListener("click", () => {closePopup(popupOpenPhotoElement) });
-popupCloseButtonElement.addEventListener("click", () => {closePopup(popupElement)});
-closePopupElement.addEventListener("click", () => {closePopup(popupAddCardElement)});
+popupCloseButtonElement.addEventListener("click", () => {closePopup(profilePopup)});
+closePopupElement.addEventListener("click", () => {
+  /* formInputTitle.value = "";
+     formInputUrl.value = "";  очистка формы при закрытии */
+   closePopup(popupAddCardElement)});
 formElementAddCard.addEventListener('submit', (evt) => {handleSubmit(evt)});
 formElement.addEventListener('submit', handleFormSubmit); 
