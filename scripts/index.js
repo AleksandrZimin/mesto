@@ -35,7 +35,7 @@ const addPopupElement = document.querySelector('.profile__add-button');
 const popupAddCardElement = document.querySelector('.popup-el');
 const closePopupElement = popupAddCardElement.querySelector('.popup-el__close');
 const popupOpenPhotoElement = document.querySelector('.popup-photo');
-const popupClosePhotoElement = document.querySelector('.popup-photo__close');
+const popupClosePhotoElement = popupOpenPhotoElement.querySelector('.popup-photo__close');
 
 const openPopupPhotoEl = document.querySelector('.element__image');
 const template = document.querySelector('.template').content;
@@ -46,13 +46,13 @@ const formButton = popupAddCardElement.querySelector('.form__button');
 const deleteButton = document.querySelector('.element__card');
 const heartIcon = document.querySelector('.element__icon');
 const itemCard = document.querySelector('.element');
-const popupNameInputElement = document.querySelector('.form__input_place_name');
-const popupNameJobElement = document.querySelector('.form__input_place_job');
+const popupNameInputElement = popupElement.querySelector('.form__input_place_name');
+const popupNameJobElement = popupElement.querySelector('.form__input_place_job');
 const userName = document.querySelector('.profile__name');
 const userJob = document.querySelector('.profile__job');
 
-const photoSubtitle = document.querySelector('.popup-photo__subtitle');
-const photoItemPopup = document.querySelector('popup-photo__item');
+const photoSubtitle = popupOpenPhotoElement.querySelector('.popup-photo__subtitle');
+const photoItemPopup = popupOpenPhotoElement.querySelector('.popup-photo__item');
 const elementTitle = document.querySelector('.element__title');
 
 /* Открытие поп апа */
@@ -85,7 +85,6 @@ sectionElements.prepend(card);
 function makeCard(link, name) {
    const clone = template.cloneNode(true);
    const photoItem = clone.querySelector('.element__image');
-   const photoItemPopup = document.querySelector('.popup-photo__item');
 
    clone.querySelector('.element__title').textContent = name;
    photoItem.src = link;
@@ -131,7 +130,7 @@ const card = event.target.closest('.element');
 card.remove();
 }
 
-// evt = событие 
+/* evt = событие */
 function handleLike (evt) {
    const likeButton = evt.target;
    likeButton.classList.toggle('element__icon_active');
