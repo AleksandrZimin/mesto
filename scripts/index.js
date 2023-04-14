@@ -49,6 +49,9 @@ const popupNameInputElement = profilePopup.querySelector('.form__input_place_nam
 const popupNameJobElement = profilePopup.querySelector('.form__input_place_job');
 const userName = document.querySelector('.profile__name');
 const userJob = document.querySelector('.profile__job');
+/* Получение кнопок для валидации формы*/
+const addPlaceBtn = document.querySelector('.form__button_type_place')
+const addProfileBtn = document.querySelector('.form__button_type_profile')
 
 const photoSubtitle = popupOpenPhotoElement.querySelector('.popup__subtitle');
 const photoItemPopup = popupOpenPhotoElement.querySelector('.popup__item');
@@ -65,12 +68,6 @@ const closePopup  = function (namePopup) {
    namePopup.classList.remove('popup_opened');
    // document.body.style.overflow = '';
 };
- 
-//  const closePopupByClickOverlay = function (event) {
-//     if (event.target === event.currentTarget){
-//        closePopup();
-//     }
-//  } 
 
 /* Вывод элементов */
  initialCards.forEach((card) => {renderItem(card.link, card.name)});
@@ -111,6 +108,8 @@ function handleFormSubmit (evt) {
    /* Вставляем новые значения с помощью textContent */
    userName.textContent = popupNameInputElement.value; 
    userJob.textContent = popupNameJobElement.value;
+   disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
+   disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
    closePopup(profilePopup);
 }
 
@@ -122,6 +121,8 @@ const handleSubmit = (evt) => {
    renderItem(valueLink, valueTitle);
    closePopup(popupAddCardElement);
    evt.target.reset()
+   disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
+   disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
 }
 
 /* Удаление карточки */
@@ -138,15 +139,62 @@ function handleLike (evt) {
 
 /* Регистрируем обработчики событий */
 popupOpenButtonElement.addEventListener("click", () => { 
-   popupNameInputElement.value = userName.textContent;
-   popupNameJobElement.value = userJob.textContent;
-   openPopup(profilePopup) });
+popupNameInputElement.value = userName.textContent;
+popupNameJobElement.value = userJob.textContent;
+checkInputValid(popupNameInputElement, validationConfig); //Отмена валидации при открытии попапа
+checkInputValid(popupNameJobElement, validationConfig); //Отмена валидации при открытии попапа
+openPopup(profilePopup) });
 addPopupElement.addEventListener("click", () => { openPopup(popupAddCardElement) });
 popupClosePhotoElement.addEventListener("click", () => {closePopup(popupOpenPhotoElement) });
 popupCloseButtonElement.addEventListener("click", () => {closePopup(profilePopup)});
 closePopupElement.addEventListener("click", () => {
-  /* formInputTitle.value = "";
-     formInputUrl.value = "";  очистка формы при закрытии */
-   closePopup(popupAddCardElement)});
+closePopup(popupAddCardElement)});
 formElementAddCard.addEventListener('submit', (evt) => {handleSubmit(evt)});
 formElement.addEventListener('submit', handleFormSubmit); 
+
+/* Закрытие попапов при нажатии на оверлей и Escape */
+profilePopup.addEventListener('click', (event) => {
+   if (event.target === event.currentTarget){
+      closePopup(profilePopup);
+   }
+})
+document.addEventListener('keydown', function (event) {
+   if(event.key === "Escape") {
+      closePopup(profilePopup);
+   }
+ }); 
+
+popupAddCardElement.addEventListener('click', (event) => {
+   if (event.target === event.currentTarget){
+      closePopup(popupAddCardElement);
+   }
+})
+document.addEventListener('keydown', function (event) {
+   if(event.key === "Escape") {
+      closePopup(popupAddCardElement);
+   }
+ }); 
+
+popupOpenPhotoElement.addEventListener('click', (event) => {
+   if (event.target === event.currentTarget){
+      closePopup(popupOpenPhotoElement);
+   }
+})
+document.addEventListener('keydown', function (event) {
+   if(event.key === "Escape") {
+      closePopup(popupOpenPhotoElement);
+   }
+ }); 
+
+
+
+   const validationConfig = {
+      formSelector: '.form',
+      inputSelector: '.form__input',
+      submitButtonSelector: '.form__button',
+      inactiveButtonClass: 'form__button_disabled',
+      inputErrorClass: 'form__input_error',
+      errorClass: 'popup-error_visible'
+    }
+
+   enableValidation(validationConfig); // Вызов функции валидации
