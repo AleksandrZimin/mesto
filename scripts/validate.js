@@ -12,14 +12,16 @@ const setEventListeners = (form, {inputSelector, submitButtonSelector, inactiveB
    switchButtonState(formButton, formInputs, inactiveButtonClass) // отключение кнопок при загрузке страницы 
    formInputs.forEach(input => {
       input.addEventListener('input', () => {  // вешаем на импут слушатель события ввода
-         checkInputValid(input, rest)
+         console.log(form)
+         console.log('123')
+         checkInputValid(input, form, rest)
          switchButtonState(formButton, formInputs, inactiveButtonClass) // отключение кнопки
       })
    })
 }
 
-const checkInputValid = (input, rest) => {   // функция проверки валидности информации при вводе
-   const errorSpan = document.querySelector(`#${input.name}-error`) // выбираем элемент с ошибкой
+const checkInputValid = (input, form, rest) => {   // функция проверки валидности информации при вводе
+   const errorSpan = form.querySelector(`#${input.name}-error`) // выбираем элемент с ошибкой
    if(input.validity.valid) {   // Если проверка валидации возвращает тру, то вызываем функцию скрытие ошибки, если фолс, то добавляем ошибку
       hideError(errorSpan, input, rest)
    } else {

@@ -28,7 +28,8 @@ const initialCards = [{
 const profilePopup = document.querySelector('.profile-popup');
 const popupCloseButtonElement = profilePopup.querySelector('.popup-profile-close');
 const popupOpenButtonElement = document.querySelector('.profile__button');
-const formElement = profilePopup.querySelector('.form');
+// const formElement = profilePopup.querySelector('.form');
+const formElementProfile = document.querySelector('.form_type_profile');
 const formElementAddCard = document.querySelector('.form_type_addCard');
 const addPopupElement = document.querySelector('.profile__add-button');
 const popupAddCardElement = document.querySelector('.card-popup');
@@ -60,12 +61,14 @@ const elementTitle = document.querySelector('.element__title');
 /* Открытие поп апа */
 const openPopup = function (namePopup) {
  namePopup.classList.add('popup_opened');
+ document.addEventListener('keydown', closePopupEsc); 
 // document.body.style.overflow = "hidden";
 };
 
 /* Закрытие поп апа */
 const closePopup  = function (namePopup) {
    namePopup.classList.remove('popup_opened');
+   document.removeEventListener('keydown', closePopupEsc); 
    // document.body.style.overflow = '';
 };
 
@@ -108,7 +111,7 @@ function handleFormSubmit (evt) {
    /* Вставляем новые значения с помощью textContent */
    userName.textContent = popupNameInputElement.value; 
    userJob.textContent = popupNameJobElement.value;
-   disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
+   // disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
    disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
    closePopup(profilePopup);
 }
@@ -122,7 +125,7 @@ const handleSubmit = (evt) => {
    closePopup(popupAddCardElement);
    evt.target.reset()
    disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
-   disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
+   // disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
 }
 
 /* Удаление карточки */
@@ -137,12 +140,28 @@ function handleLike (evt) {
    likeButton.classList.toggle('element__icon_active');
 }
 
+/* Закрытие попапа на Esc*/
+function closePopupEsc (evt) {
+   if(evt.key === "Escape") {
+      const openedPopup = document.querySelector('.popup_opened')
+      closePopup(openedPopup);
+   }
+}
+
+/* Закрытие попапа на Overlay*/
+function closePopupOvarlay (evt, popupName) {
+   if (evt.target === evt.currentTarget){
+      closePopup(popupName);
+   }
+}
+
+
 /* Регистрируем обработчики событий */
 popupOpenButtonElement.addEventListener("click", () => { 
 popupNameInputElement.value = userName.textContent;
 popupNameJobElement.value = userJob.textContent;
-checkInputValid(popupNameInputElement, validationConfig); //Отмена валидации при открытии попапа
-checkInputValid(popupNameJobElement, validationConfig); //Отмена валидации при открытии попапа
+checkInputValid(popupNameInputElement, formElementProfile, validationConfig); //Отмена валидации при открытии попапа
+checkInputValid(popupNameJobElement, formElementProfile, validationConfig); //Отмена валидации при открытии попапа
 openPopup(profilePopup) });
 addPopupElement.addEventListener("click", () => { openPopup(popupAddCardElement) });
 popupClosePhotoElement.addEventListener("click", () => {closePopup(popupOpenPhotoElement) });
@@ -150,43 +169,12 @@ popupCloseButtonElement.addEventListener("click", () => {closePopup(profilePopup
 closePopupElement.addEventListener("click", () => {
 closePopup(popupAddCardElement)});
 formElementAddCard.addEventListener('submit', (evt) => {handleSubmit(evt)});
-formElement.addEventListener('submit', handleFormSubmit); 
+formElementProfile.addEventListener('submit', handleFormSubmit); 
 
-/* Закрытие попапов при нажатии на оверлей и Escape */
-profilePopup.addEventListener('click', (event) => {
-   if (event.target === event.currentTarget){
-      closePopup(profilePopup);
-   }
-})
-document.addEventListener('keydown', function (event) {
-   if(event.key === "Escape") {
-      closePopup(profilePopup);
-   }
- }); 
-
-popupAddCardElement.addEventListener('click', (event) => {
-   if (event.target === event.currentTarget){
-      closePopup(popupAddCardElement);
-   }
-})
-document.addEventListener('keydown', function (event) {
-   if(event.key === "Escape") {
-      closePopup(popupAddCardElement);
-   }
- }); 
-
-popupOpenPhotoElement.addEventListener('click', (event) => {
-   if (event.target === event.currentTarget){
-      closePopup(popupOpenPhotoElement);
-   }
-})
-document.addEventListener('keydown', function (event) {
-   if(event.key === "Escape") {
-      closePopup(popupOpenPhotoElement);
-   }
- }); 
-
-
+/* Закрытие попапов при нажатии на OverLay */
+profilePopup.addEventListener('click', (evt) => {closePopupOvarlay(evt, profilePopup)});
+popupOpenPhotoElement.addEventListener('click', (evt) => {closePopupOvarlay(evt, popupOpenPhotoElement)});
+popupAddCardElement.addEventListener('click', (evt) => {closePopupOvarlay(evt, popupAddCardElement)});
 
    const validationConfig = {
       formSelector: '.form',
