@@ -1,5 +1,5 @@
-import Card from './Card';
-import FormValidator from './FormValidator';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const initialCards = [{
    name: 'Архыз',
@@ -26,6 +26,15 @@ const initialCards = [{
    link: 'https://images.unsplash.com/photo-1679564881633-fc8ef0c9c07f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
 }
 ];
+
+const validationConfig = {
+   formSelector: '.form',
+   inputSelector: '.form__input',
+   submitButtonSelector: '.form__button',
+   inactiveButtonClass: 'form__button_disabled',
+   inputErrorClass: 'form__input_error',
+   errorClass: 'popup-error_visible'
+ }
 
 /* Делаем выборку DOM элементов */
 const profilePopup = document.querySelector('.profile-popup');
@@ -60,6 +69,11 @@ const addProfileBtn = document.querySelector('.form__button_type_profile')
 const photoSubtitle = popupOpenPhotoElement.querySelector('.popup__subtitle');
 const photoItemPopup = popupOpenPhotoElement.querySelector('.popup__item');
 const elementTitle = document.querySelector('.element__title');
+
+const profileValidator = new FormValidator(validationConfig, formElementProfile)
+const cardValidator = new FormValidator(validationConfig, formElementAddCard)
+profileValidator.enableValidation();
+cardValidator.enableValidation(); // Вызов функции валидации
 
 /* Открытие поп апа */
 const openPopup = function (namePopup) {
@@ -105,11 +119,11 @@ const closePopup  = function (namePopup) {
 //    return clone
 // }
 
-function openPhoto(name, link) {
-   openPopup(popupOpenPhotoElement) 
+function openPhoto(name, link) { 
+      photoItemPopup.src = link;
       photoSubtitle.textContent = name;
       photoItemPopup.alt = name;
-      photoItemPopup.src = link;
+      openPopup(popupOpenPhotoElement)
 }
 
 /* Сохранение данных из формы на страницу */
@@ -121,8 +135,7 @@ function handleFormSubmit (evt) {
    /* Вставляем новые значения с помощью textContent */
    userName.textContent = popupNameInputElement.value; 
    userJob.textContent = popupNameJobElement.value;
-   // disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
-   disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
+   profileValidator.disableButton();
    closePopup(profilePopup);
 }
 
@@ -136,8 +149,9 @@ const handleSubmit = (evt) => {
    const cardElement = card.generateCard();
    cardsList.prepend(cardElement);
    closePopup(popupAddCardElement);
-   evt.target.reset()
-   disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
+   evt.target.reset();
+   // disableButton(addPlaceBtn, validationConfig.inactiveButtonClass)
+   cardValidator.disableButton();
    // disableButton(addProfileBtn, validationConfig.inactiveButtonClass)
 }
 
@@ -173,8 +187,8 @@ function closePopupOvarlay (evt, popupName) {
 popupOpenButtonElement.addEventListener("click", () => { 
 popupNameInputElement.value = userName.textContent;
 popupNameJobElement.value = userJob.textContent;
-checkInputValid(popupNameInputElement, formElementProfile, validationConfig); //Отмена валидации при открытии попапа
-checkInputValid(popupNameJobElement, formElementProfile, validationConfig); //Отмена валидации при открытии попапа
+profileValidator.resetForm()
+profileValidator.disableButton();
 openPopup(profilePopup) });
 addPopupElement.addEventListener("click", () => { openPopup(popupAddCardElement) });
 popupClosePhotoElement.addEventListener("click", () => {closePopup(popupOpenPhotoElement) });
@@ -189,25 +203,15 @@ profilePopup.addEventListener('click', (evt) => {closePopupOvarlay(evt, profileP
 popupOpenPhotoElement.addEventListener('click', (evt) => {closePopupOvarlay(evt, popupOpenPhotoElement)});
 popupAddCardElement.addEventListener('click', (evt) => {closePopupOvarlay(evt, popupAddCardElement)});
 
-   const validationConfig = {
-      formSelector: '.form',
-      inputSelector: '.form__input',
-      submitButtonSelector: '.form__button',
-      inactiveButtonClass: 'form__button_disabled',
-      inputErrorClass: 'form__input_error',
-      errorClass: 'popup-error_visible'
-    }
-
-   enableValidation(validationConfig); // Вызов функции валидации
-
 
 initialCards.forEach((initialCard) => {
-const cardTemplateSelector = document.querySelector('.template');
+// const cardTemplateSelector = document.querySelector('.template');
 const cardsList = document.querySelector('.elements');
 
-const card = new Card(initialCard, cardTemplateSelector, openPhoto);
+const card = new Card(initialCard, '.template', openPhoto);
 const cardElement = card.generateCard();
 
 // Добавляем элемент на страницу
 cardsList.prepend(cardElement);
+
 });

@@ -7,7 +7,7 @@ export default class Card {
 
    _getTemplate() {
       const cardElement = document
-        .querySelector('.template')
+        .querySelector(this._templateSelector)
         .content
         .querySelector('.element')
         .cloneNode(true);
@@ -40,10 +40,8 @@ export default class Card {
   //   }
 
   _handleImageClick () {
-    openPhoto(this._initialCard.name, this._initialCard.link)
+    this._openPhoto(this._initialCard.name, this._initialCard.link)
   }
-
-  
 
    _handleDeleteClick() {
       // удаляет карточку
