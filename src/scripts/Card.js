@@ -50,9 +50,7 @@ export default class Card {
 
   _handleLikeClick() {
     // добавляет/удаляет лайк
-    this._cardElement
-      .querySelector(".element__icon")
-      .classList.toggle("element__icon_active");
+    this._likeButton.classList.toggle("element__icon_active");
   }
 
   generateCard() {
