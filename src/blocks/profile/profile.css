@@ -9,7 +9,7 @@
    .profile {
        display: flex;
        flex-direction: column;
-       justify-content: start;
+       justify-content:  flex-start;
        padding: 40.5px 0 36px 0;
    }
 }
