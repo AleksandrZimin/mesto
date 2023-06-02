@@ -28,16 +28,6 @@ export default class Card {
     });
   }
 
-  //  _handleCardClick(initialCard) {
-  //     // открывает полноразмерное изображение
-  //     const popupImage = document.querySelector('.popup__item');
-  //           popupImage.src = initialCard.link;
-  //           popupImage.alt = initialCard.name;
-  //           document.querySelector('.popup__subtitle').textContent = initialCard.name;
-  //           document.querySelector('.popup-photo').classList.add('popup_opened');
-
-  //   }
-
   _handleImageClick() {
     this._openPhoto(this._initialCard.name, this._initialCard.link);
   }
@@ -69,11 +59,4 @@ export default class Card {
 
     return this._cardElement;
   }
-
-  // getCardData() {
-  //   return {
-  //     name: this._initialCards.name,
-  //     link: this._initialCards.link
-  //   };
-  // }
 }
