@@ -66,6 +66,7 @@ export default class Card {
       this._cardData.name;
     this._cardImage = this._cardElement.querySelector(".element__image");
     this._deleteButton = this._cardElement.querySelector(".element__delete");
+    this.cardNumber = this._cardElement.querySelector(".element__number");
     if (this.cardOwner() === false) {
       this._deleteButton.remove();
     }
@@ -82,8 +83,7 @@ export default class Card {
 
   updateLikes(likes) {
     this._likes = likes;
-    this._cardElement.querySelector(".element__number").textContent =
-      likes.length;
+    this.cardNumber.textContent = likes.length;
     if (this.cardLiked()) {
       this._likeButton.classList.add("element__icon_active");
     } else {
