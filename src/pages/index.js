@@ -41,8 +41,8 @@ const api = new API("https://nomoreparties.co/v1/cohort-68/", {
 
 let id;
 
-Promise.all([api.getCard(), api.getUserInfo()]).then(
-  ([elements, userInfomation]) => {
+Promise.all([api.getCard(), api.getUserInfo()])
+  .then(([elements, userInfomation]) => {
     const { name, about, avatar, _id } = userInfomation;
     id = _id;
     userInfo.setUserInfo({
@@ -51,8 +51,8 @@ Promise.all([api.getCard(), api.getUserInfo()]).then(
       avatar,
     });
     cards.rendererElements(elements);
-  }
-);
+  })
+  .catch((err) => console.log(`Ошибка: ${err}`));
 
 /* Валидация формы*/
 
@@ -177,6 +177,7 @@ popupOpenButtonElement.addEventListener("click", () => {
 
 buttonAddCard.addEventListener("click", () => {
   cardPopup.open();
+  cardValidator.disableButton();
 });
 
 function handleLike(card, id) {
@@ -191,4 +192,5 @@ function handleLike(card, id) {
 
 profilePhoto.addEventListener("click", () => {
   popupAvatar.open();
+  avatarValidator.disableButton();
 });
