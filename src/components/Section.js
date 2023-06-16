@@ -9,6 +9,6 @@ export default class Section {
   }
 
   rendererElements(cards) {
-    cards.forEach(this._renderer);
+    cards.reverse().forEach(this._renderer);
   }
 }

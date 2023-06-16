@@ -13,6 +13,10 @@ export const karachaevsk = new URL(
 );
 export const logo = new URL("../images/logo.svg", import.meta.url);
 export const vector = new URL("../images/Vector(1).svg", import.meta.url);
+export const avatarRedactor = new URL(
+  "../images/avatar-hover.svg",
+  import.meta.url
+);
 
 export const interBlack = new URL(
   "../fonts//Inter/Inter-Black.woff",
@@ -59,6 +63,7 @@ export const whoIsTheGoat = [
   { name: "interMedium2", link: interMedium2 },
   { name: "interRegular", link: interRegular },
   { name: "interRegular2", link: interRegular2 },
+  { name: "avatarRedactor", link: avatarRedactor },
 ];
 
 export const initialCards = [

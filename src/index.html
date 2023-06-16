@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body class="page">
@@ -16,6 +15,7 @@
     <main class="main">
         <section class="profile">
             <img src="<%=require('./images/Avatar.png')%>" alt="Аватарка" class="profile__avatar">
+            <button class="profile__avatar-button"></button>
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="button profile__button"></button>
@@ -37,7 +37,11 @@
          <img src="<%=require('./images/karachaevsk.jpg')%>" alt="Карачаевск" class="element__image">
          <div class="element__place">
              <h2 class="element__title">Карачаево-Черкессия</h2>
-             <button type="button" class="element__icon button"></button>
+             <div class="elements__like">
+                <button type="button" class="element__icon button"></button>
+                <span class="element__number"></span>
+            </div>
+             
          </div>
          <img src="<%=require('./images/delete.svg')%>" alt="Удаление" class="element__delete">
      </article>
@@ -53,7 +57,7 @@
                 <button class="form__button form__button_type_profile" value="" type="submit">Сохранить</button>
             </form>
             <button type="button" class="button">
-            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close popup-profile-close">
+            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close">
          </button>
         </div>
     </div>
@@ -68,7 +72,7 @@
                 <button class="form__button form__button_type_place" value="#" type="submit">Создать</button>
             </form>
             <button type="button" class="button">
-            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close popup-card-close">
+            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close">
          </button>
         </div>
     </div>
@@ -77,13 +81,34 @@
             <img src="<%=require('./images/karachaevsk.jpg')%>" alt="Фото" class="popup__item">
             <h2 class="popup__subtitle">Карачаевск</h2>
          <button type="button" class="button">
-            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close popup-photo-close">
+            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close">
          </button>
         </div>
     </div>
-
-    <!-- <script src="./scripts/validate.js"></script> -->
-    <!-- <script type="module" src="./scripts/index.js"></script> -->
+    <div class="popup popup-approval popup_opacity">
+        <div class="popup__container">
+            <h2 class="popup__title popup__title_approval">Вы уверены?</h2>
+            <form action="#" name="popup-approval" class="form form_type_approval" novalidate>
+                <button class="form__button form__button_type_place" type="submit">Да</button>
+            </form>
+         <button type="button" class="button">
+            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close">
+         </button>
+        </div>
+    </div>
+    <div class="popup popup-avatar">
+        <div class="popup__container">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form action="#" name="popup-avatar" class="form form_type_updateAvatar" novalidate>
+                <input type="url" name="avatar" class="form__input form__input_place_link" placeholder="Ссылка на картинку" required>
+                <span id="avatar-error" class="popup-error"></span>
+                <button class="form__button form__button_type_place" value="#" type="submit">Сохранить</button>
+            </form>
+            <button type="button" class="button">
+            <img src="<%=require('./images/Close-Icon.svg')%>" alt="Крестик" class="popup__close">
+         </button>
+        </div>
+    </div>
 </body>
 
 </html>

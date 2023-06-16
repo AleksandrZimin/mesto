@@ -30,4 +30,12 @@ export default class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
   }
+
+  formLoading(loading) {
+    if (loading === true) {
+      this._button.textContent = "Сохранение...";
+    } else {
+      this._button.textContent = "Сохранить";
+    }
+  }
 }
